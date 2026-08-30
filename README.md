@@ -1,8 +1,8 @@
 # yaml2kvd
 
-Convert YAML documents to KVD — and KVD to YAML with `--reverse`.
+Convert YAML documents to KVD and KVD to YAML.
 
-KVD is a line-oriented config/data format that keeps YAML readability without pitfalls: strict 2-space indentation, no flow collections, no implicit coercion, exactly one way to spell most things.
+KVD is an opinionated human-readable config/data format.
 
 ## Install
 
