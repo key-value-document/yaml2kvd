@@ -77,3 +77,26 @@ fn kvd_to_yaml_empty_collections() {
     let node = Node::scalar(Shape::Null, "null");
     to_yaml(&node).unwrap();
 }
+
+#[test]
+fn kvd_underscore_int_converts_to_yaml() {
+    let yaml = kvd_text_to_yaml("port: 8_080\n").unwrap();
+    assert!(yaml.contains("8080"));
+}
+
+#[test]
+fn kvd_dict_converts_to_yaml_mapping() {
+    let kvd = "metrics:\n  = \"errors/total\": 3\n";
+    let yaml = kvd_text_to_yaml(kvd).unwrap();
+    assert!(yaml.contains("errors/total"));
+    assert!(yaml.contains('3'));
+}
+
+#[test]
+fn yaml_int_round_trips_without_separators() {
+    let kvd = yaml_text_to_kvd("port: 8080\n", None).unwrap();
+    assert!(kvd.contains("port: 8080"));
+    assert!(!kvd.contains('_'));
+    let yaml = kvd_text_to_yaml(&kvd).unwrap();
+    assert!(yaml.contains("8080"));
+}

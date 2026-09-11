@@ -99,9 +99,10 @@ pub fn to_yaml_value(node: &Node) -> Result<Value, Error> {
         Node::Scalar(s) => match s.shape {
             Shape::Bool => Ok(Value::Bool(s.text == "true")),
             Shape::Int => {
-                if let Ok(i) = s.text.parse::<i64>() {
+                let clean = s.text.replace('_', "");
+                if let Ok(i) = clean.parse::<i64>() {
                     Ok(Value::Number(i.into()))
-                } else if let Ok(u) = s.text.parse::<u64>() {
+                } else if let Ok(u) = clean.parse::<u64>() {
                     Ok(Value::Number(u.into()))
                 } else {
                     Err(Error(format!(
@@ -126,7 +127,7 @@ pub fn to_yaml_value(node: &Node) -> Result<Value, Error> {
             Shape::Str => Ok(Value::String(s.text.clone())),
             Shape::Null => Ok(Value::Null),
         },
-        Node::Map(m) => {
+        Node::Map(m) | Node::Dict(m) => {
             let mut out = serde_yaml_ng::Mapping::new();
             for (k, v) in m.iter() {
                 out.insert(Value::String(k.to_string()), to_yaml_value(v)?);
