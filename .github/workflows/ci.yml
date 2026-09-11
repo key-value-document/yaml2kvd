@@ -1,5 +1,3 @@
-# CI for yaml2kvd.
-
 name: ci
 
 on:

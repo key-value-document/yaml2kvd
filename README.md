@@ -39,7 +39,7 @@ app:
 
 Output `values.kvd`:
 
-```
+```kvd
 app:
   name: "hello"
   port: 8080
@@ -56,8 +56,6 @@ yaml2kvd --reverse values.kvd
 ```toml
 [dependencies]
 yaml2kvd = "1.1.0"
-kvd-rs = "1.1.0"
-serde_yaml_ng = "0.10.0"
 ```
 
 ```rust
