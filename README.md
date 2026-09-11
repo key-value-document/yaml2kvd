@@ -55,8 +55,8 @@ yaml2kvd --reverse values.kvd
 
 ```toml
 [dependencies]
-yaml2kvd = "1.0.0"
-kvd-rs = "1.0.0"
+yaml2kvd = "1.1.0"
+kvd-rs = "1.1.0"
 serde_yaml_ng = "0.10.0"
 ```
 
